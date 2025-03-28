@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EngSci Webring | University of Toronto</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --primary-color: #E31837; /* UofT Red */
+            --secondary-color: #002452; /* Dark Blue */
+            --tertiary-color: #F2A900; /* Gold */
+            --light-color: #ffffff;
+            --dark-color: #121212;
+            --grey-color: #f5f5f5;
+            --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            --text-color: #121212;
+            --bg-color: #ffffff;
+            --card-bg: #ffffff;
+            --border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        [data-theme="dark"] {
+            --primary-color: #FF3C57; /* Brighter red for dark mode */
+            --secondary-color: #0E3C7E; /* Lighter blue for dark mode */
+            --tertiary-color: #FFBC3C; /* Brighter gold for dark mode */
+            --light-color: #121212;
+            --dark-color: #f5f5f5;
+            --grey-color: #2A2A2A;
+            --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            --text-color: #f5f5f5;
+            --bg-color: #1A1A1A;
+            --card-bg: #2A2A2A;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --url-bg: #3A3A3A; /* Slightly lighter background for URLs in dark mode */
+            --url-text: #B8E1FF; /* Light blue text for URLs in dark mode */
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem 2rem;
+        }
+        
+        header {
+            padding: 2rem 0;
+            margin-bottom: 3rem;
+            position: relative;
+            background: var(--secondary-color); /* Changed from primary to secondary color (blue) */
+            border-bottom-left-radius: 50% 20%;
+            border-bottom-right-radius: 50% 20%;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            color: var(--light-color);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 span {
+            color: var(--tertiary-color);
+        }
+        
+        .logos {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo {
+            height: 60px;
+            width: auto;
+        }
+        
+        .search-container {
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            padding-left: 3.5rem;
+            border: none;
+            border-radius: 50px;
+            background-color: var(--grey-color);
+            font-size: 1rem;
+            box-shadow: var(--card-shadow);
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(227, 24, 55, 0.3);
+        }
+        
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            left: 1.2rem;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+        }
+        
+        .student-list {
+            list-style-type: none;
+        }
+        
+        .student-item {
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            background-color: var(--card-bg);
+        }
+        
+        .student-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+        
+        .student-content {
+            padding: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .student-info {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .student-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-color);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .student-details {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .name {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .year {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .visit-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1.2rem;
+            background-color: var(--secondary-color);
+            color: var(--light-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .visit-link:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .link-icon {
+            margin-left: 0.5rem;
+        }
+        
+        .profile-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            position: sticky;
+            top: 2rem;
+        }
+        
+        .profile-header {
+            background-color: var(--secondary-color);
+            height: 80px;
+            position: relative;
+            margin-bottom: 20px; /* Added margin to compensate for removed image */
+        }
+        
+        .profile-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0.5rem 0;
+        }
+        
+        .profile-year {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .profile-url {
+            display: inline-block;
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--grey-color);
+            border-radius: 8px;
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin: 1rem 0;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            word-break: break-word; /* Prevents long URLs from breaking layout */
+        }
+        
+        [data-theme="dark"] .profile-url {
+            background-color: var(--url-bg);
+            color: var(--url-text);
+        }
+        
+        .profile-url:hover {
+            background-color: var(--secondary-color);
+            color: var(--light-color);
+        }
+        
+        [data-theme="dark"] .profile-url:hover {
+            background-color: #1E5BB0; /* Brighter blue for hover state in dark mode */
+            color: #ffffff;
+        }
+        
+        .how-to-join {
+            margin-top: 4rem;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .how-to-join h2 {
+            color: var (--secondary-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+        
+        .how-to-join h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+        
+        .how-to-join ol {
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .how-to-join li {
+            margin-bottom: 1rem;
+        }
+        
+        code {
+            display: block;
+            background-color: var(--grey-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        
+        .github-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .github-link:hover {
+            text-decoration: underline;
+        }
+        
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--light-color);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .highlight {
+            color: var(--tertiary-color);
+            font-weight: 600;
+        }
+        
+        @media (max-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-card {
+                position: static;
+                margin-bottom: 2rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--grey-color);
+            color: var (--secondary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Theme toggle styles */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background-color: var(--secondary-color);
+            color: var(--light-color);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            transform: translateY(-5px);
+        }
+        
+        .theme-toggle i {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Eng<span>Sci</span> Webring</h1>
+            <div class="logos">
+                <img src="/images/uoft-logo.png" alt="UofT Logo" class="logo">
+                <img src="/images/engsci-logo.png" alt="EngSci Logo" class="logo">
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search by name, website, or graduation year...">
+        </div>
+        
+        <div class="main-content">
+            <div>
+                <ul class="student-list" id="studentList">
+                    <!-- Student list will be populated by JavaScript -->
+                </ul>
+                
+                <div class="how-to-join">
+                    <h2>Join the EngSci Webring</h2>
+                    <p>Are you a UofT Engineering Science student with a personal website? Join by following these steps:</p>
+                    <ol>
+                        <li>Fork the <a href="https://github.com/brayden-zhang/engsci-webring" class="github-link">GitHub repository</a></li>
+                        <li>Edit the <code>sites.js</code> file to add your information:</li>
+                        <code>{
+    name: "Your Name",
+    url: "https://yourwebsite.com",
+    year: "2X",
+    social: {
+        linkedin: "https://linkedin.com/in/yourprofile",
+        github: "https://github.com/yourusername",
+        twitter: "https://twitter.com/yourhandle",
+        instagram: "https://instagram.com/yourprofile"
+        // Add any other social platforms you use
+    }
+}</code>
+                        <li>Submit a pull request</li>
+                        <li>Once approved, your site will appear in the webring!</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div id="featuredProfile">
+                <!-- Featured profile will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Theme toggle button -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+    
+    <footer>
+        <p>Made by the  UofT EngSci community.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const studentList = document.getElementById('studentList');
+            const featuredProfile = document.getElementById('featuredProfile');
+            const searchInput = document.getElementById('searchInput');
+            const themeToggle = document.getElementById('themeToggle');
+            
+            // Theme toggle functionality
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                
+                // Update icon
+                themeToggle.innerHTML = newTheme === 'light' 
+                    ? '<i class="fas fa-moon"></i>' 
+                    : '<i class="fas fa-sun"></i>';
+            });
+            
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            themeToggle.innerHTML = savedTheme === 'light' 
+                ? '<i class="fas fa-moon"></i>' 
+                : '<i class="fas fa-sun"></i>';
+            
+            // Create script element to load sites.js
+            const script = document.createElement('script');
+            script.src = 'sites.js';
+            script.onload = function() {
+                // Once sites.js is loaded, initialize the student list
+                displayStudents(sites);
+                
+                // Show first student as featured by default
+                if (sites.length > 0) {
+                    showFeaturedProfile(sites[0]);
+                }
+            };
+            document.head.appendChild(script);
+            
+            // Display all students
+            function displayStudents(students) {
+                studentList.innerHTML = '';
+                
+                students.forEach(student => {
+                    const li = document.createElement('li');
+                    li.className = 'student-item';
+                    
+                    // Get initials for avatar
+                    const initials = getInitials(student.name);
+                    
+                    // Ensure URL has proper format for external linking
+                    const formattedUrl = ensureHttpPrefix(student.url);
+                    
+                    li.innerHTML = `
+                        <div class="student-content">
+                            <div class="student-info">
+                                <div class="student-avatar">${initials}</div>
+                                <div class="student-details">
+                                    <span class="name">${student.name}</span>
+                                    <span class="year">Class of ${student.year}</span>
+                                </div>
+                            </div>
+                            <a href="${formattedUrl}" class="visit-link" target="_blank" rel="noopener">Visit <i class="fas fa-external-link-alt link-icon"></i></a>
+                        </div>
+                    `;
+                    
+                    // Changed from click to mouseenter for hover effect
+                    li.addEventListener('mouseenter', function() {
+                        showFeaturedProfile(student);
+                    });
+                    
+                    studentList.appendChild(li);
+                });
+            }
+            
+            // Ensure URL has http/https prefix
+            function ensureHttpPrefix(url) {
+                if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                    return 'https://' + url;
+                }
+                return url;
+            }
+            
+            // Get initials from name
+            function getInitials(name) {
+                return name
+                    .split(' ')
+                    .map(word => word.charAt(0))
+                    .join('');
+            }
+            
+            // Show featured profile
+            function showFeaturedProfile(student) {
+                let socialLinksHTML = '';
+        
+                // Check if student has social profiles
+                if (student.social && Object.keys(student.social).length > 0) {
+                    socialLinksHTML = '<div class="social-links">';
+                    
+                    // Add each social link with appropriate icon
+                    if (student.social.linkedin) {
+                        socialLinksHTML += `<a href="${student.social.linkedin}" class="social-link" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>`;
+                    }
+                    if (student.social.github) {
+                        socialLinksHTML += `<a href="${student.social.github}" class="social-link" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>`;
+                    }
+                    if (student.social.twitter) {
+                        socialLinksHTML += `<a href="${student.social.twitter}" class="social-link" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>`;
+                    }
+                    if (student.social.instagram) {
+                        socialLinksHTML += `<a href="${student.social.instagram}" class="social-link" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>`;
+                    }
+                    
+                    socialLinksHTML += '</div>';
+                }
+                
+                // Ensure URL has proper format for external linking
+                const formattedUrl = ensureHttpPrefix(student.url);
+                const displayUrl = formatUrl(formattedUrl);
+                
+                featuredProfile.innerHTML = `
+                    <div class="profile-card">
+                        <div class="profile-header"></div>
+                        <div class="profile-content">
+                            <h3 class="profile-name">${student.name}</h3>
+                            <p class="profile-year">Engineering Science '${student.year}</p>
+                            <a href="${formattedUrl}" class="profile-url" target="_blank" rel="noopener" title="Visit ${student.name}'s website">${displayUrl}</a>
+                            ${socialLinksHTML}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Format URL for display (remove http/https)
+            function formatUrl(url) {
+                return url.replace(/(^\w+:|^)\/\//, '');
+            }
+            
+            // Filter students based on search input
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const filteredStudents = sites.filter(student => {
+                    return (
+                        student.name.toLowerCase().includes(searchTerm) ||
+                        student.url.toLowerCase().includes(searchTerm) ||
+                        student.year.toLowerCase().includes(searchTerm)
+                    );
+                });
+                
+                displayStudents(filteredStudents);
+            });
+        });
+    </script>
+</body>
+</html>
