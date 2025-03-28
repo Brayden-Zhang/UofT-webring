@@ -19,6 +19,7 @@ Welcome to the EngSci Webring project! This project is designed to create a comm
 
 - To join the EngSci Webring, fork the repository and add your information to the `sites.js` file.
 - Submit a pull request for your changes to be reviewed and merged.
+- Highly recommended to also link back to this webring on your own personal website!
 
 ## Contributing
 
