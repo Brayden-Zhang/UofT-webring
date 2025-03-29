@@ -7,7 +7,7 @@ Welcome to the UofT Webring project! This project is designed to create a commun
 1. **Clone the Repository**: 
    ```bash
    git clone https://github.com/brayden-zhang/UofT-webring.git
-   cd engsci-webring
+   cd UofT-webring
    ```
 
 2. **Open the Project**: Open `index.html` in your preferred web browser to view the application.
