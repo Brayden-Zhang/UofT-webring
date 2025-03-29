@@ -1,6 +1,6 @@
 # UofT Webring
 
-Welcome to the UofT Webring project! This project is designed to create a community of UofT Engineering Science students with personal websites.
+Welcome to the UofT Webring project! This project is designed to create a community of UofT students with personal websites.
 
 ## Setup Instructions
 
