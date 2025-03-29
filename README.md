@@ -6,7 +6,7 @@ Welcome to the EngSci Webring project! This project is designed to create a comm
 
 1. **Clone the Repository**: 
    ```bash
-   git clone https://github.com/brayden-zhang/engsci-webring.git
+   git clone https://github.com/brayden-zhang/UofT-webring.git
    cd engsci-webring
    ```
 
