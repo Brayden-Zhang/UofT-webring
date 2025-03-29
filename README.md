@@ -1,6 +1,6 @@
-# EngSci Webring
+# UofT Webring
 
-Welcome to the EngSci Webring project! This project is designed to create a community of UofT Engineering Science students with personal websites.
+Welcome to the UofT Webring project! This project is designed to create a community of UofT Engineering Science students with personal websites.
 
 ## Setup Instructions
 
@@ -17,7 +17,7 @@ Welcome to the EngSci Webring project! This project is designed to create a comm
 
 ## Usage Guidelines
 
-- To join the EngSci Webring, fork the repository and add your information to the `sites.js` file.
+- To join the UofT Webring, fork the repository and add your information to the `sites.js` file.
 - Submit a pull request for your changes to be reviewed and merged.
 - Highly recommended to also link back to this webring on your own personal website!
 
