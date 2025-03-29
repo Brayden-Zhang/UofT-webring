@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EngSci Webring | University of Toronto</title>
+    <title>UofT Webring | University of Toronto</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
@@ -30,12 +30,16 @@
             --dark-color: #f5f5f5;
             --grey-color: #2A2A2A;
             --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-            --text-color: #f5f5f5;
+            --text-color: #ffffff; /* Changed to pure white for better contrast */
             --bg-color: #1A1A1A;
             --card-bg: #2A2A2A;
             --border-color: rgba(255, 255, 255, 0.1);
             --url-bg: #3A3A3A; /* Slightly lighter background for URLs in dark mode */
             --url-text: #B8E1FF; /* Light blue text for URLs in dark mode */
+            --search-bg: #3A3A3A; /* Darker background for search in dark mode */
+            --search-text: #f5f5f5; /* Lighter text for search in dark mode */
+            --filter-bg: #3A3A3A; /* Dark mode filter background */
+            --filter-text: #f5f5f5; /* Dark mode filter text */
         }
         
         * {
@@ -90,6 +94,11 @@
             color: var(--tertiary-color);
         }
         
+        [data-theme="dark"] h1 {
+            color: #ffffff; /* Pure white text for better contrast */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Subtle glow for readability */
+        }
+        
         .logos {
             display: flex;
             align-items: center;
@@ -101,6 +110,11 @@
         .logo {
             height: 60px;
             width: auto;
+            transition: filter 0.3s ease;
+        }
+        
+        [data-theme="dark"] .logo {
+            filter: brightness(0) invert(1); /* Make logo white in dark mode */
         }
         
         .search-container {
@@ -119,11 +133,17 @@
             box-shadow: var(--card-shadow);
             font-family: 'Poppins', sans-serif;
             transition: all 0.3s ease;
+            color: var(--text-color);
         }
         
         .search-input:focus {
             outline: none;
             box-shadow: 0 0 0 3px rgba(227, 24, 55, 0.3);
+        }
+        
+        [data-theme="dark"] .search-input {
+            background-color: var(--search-bg);
+            color: var(--search-text);
         }
         
         .search-icon {
@@ -136,7 +156,7 @@
         
         .main-content {
             display: grid;
-            grid-template-columns: 1fr 300px;
+            grid-template-columns: 250px 1fr 300px;
             gap: 2rem;
         }
         
@@ -194,10 +214,18 @@
             color: var(--text-color);
         }
         
+        [data-theme="dark"] .name {
+            color: #ffffff; /* Pure white for better contrast */
+        }
+        
         .year {
             font-size: 0.9rem;
             color: var(--primary-color);
             font-weight: 500;
+        }
+        
+        [data-theme="dark"] .year {
+            color: #FF6B7E; /* Lighter red for better contrast */
         }
         
         .visit-link {
@@ -214,6 +242,16 @@
         
         .visit-link:hover {
             background-color: var(--primary-color);
+        }
+        
+        [data-theme="dark"] .visit-link {
+            background-color: #1E5BB0; /* Brighter blue for better visibility */
+            color: #ffffff; /* White text for better contrast */
+        }
+        
+        [data-theme="dark"] .visit-link:hover {
+            background-color: #FF3C57; /* Bright red on hover */
+            box-shadow: 0 0 10px rgba(255, 60, 87, 0.4); /* Subtle glow effect */
         }
         
         .link-icon {
@@ -297,6 +335,10 @@
             padding-bottom: 0.8rem;
         }
         
+        [data-theme="dark"] .how-to-join h2 {
+            color: #4A8BFF; /* Bright blue for better contrast */
+        }
+        
         .how-to-join h2::after {
             content: '';
             position: absolute;
@@ -335,6 +377,11 @@
             transition: all 0.2s ease;
         }
         
+        [data-theme="dark"] .github-link {
+            color: #FF6B7E; /* Brighter red for better contrast */
+            text-decoration: underline; /* Underline for better visibility */
+        }
+        
         .github-link:hover {
             text-decoration: underline;
         }
@@ -347,21 +394,40 @@
             margin-top: 4rem;
         }
         
+        [data-theme="dark"] footer {
+            background-color: #0A2A5E; /* Darker blue for better contrast */
+            color: #FFFFFF; /* Bright white text for better contrast */
+        }
+        
         .highlight {
             color: var(--tertiary-color);
             font-weight: 600;
         }
         
-        @media (max-width: 900px) {
+        @media (max-width: 1100px) {
             .main-content {
                 grid-template-columns: 1fr;
             }
             
-            .profile-card {
+            .filters, .profile-card {
                 position: static;
                 margin-bottom: 2rem;
             }
             
+            .filters {
+                order: 1;
+            }
+            
+            #studentList {
+                order: 3;
+            }
+            
+            #featuredProfile {
+                order: 2;
+            }
+        }
+        
+        @media (max-width: 900px) {
             h1 {
                 font-size: 2.2rem;
             }
@@ -387,10 +453,106 @@
             transition: all 0.3s ease;
         }
         
+        [data-theme="dark"] .social-link {
+            background-color: #4A4A4A; /* Lighter background in dark mode */
+            color: #FFFFFF; /* White icons for better contrast */
+        }
+        
         .social-link:hover {
             background-color: var(--primary-color);
             color: var(--light-color);
             transform: translateY(-3px);
+        }
+        
+        .filters {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+            position: sticky;
+            top: 2rem;
+        }
+        
+        .filters h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .filters h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+        
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .filter-select {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-family: 'Poppins', sans-serif;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.8rem center;
+            background-size: 1em;
+        }
+        
+        [data-theme="dark"] .filter-select {
+            background-color: var(--filter-bg);
+            color: var(--filter-text);
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .reset-filters {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: none;
+            background-color: var(--secondary-color);
+            color: var(--light-color);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .reset-filters:hover {
+            background-color: var(--primary-color);
+        }
+        
+        [data-theme="dark"] .reset-filters {
+            background-color: #1E5BB0; /* Brighter blue for dark mode */
+            color: #ffffff; /* White text for better contrast */
+        }
+        
+        [data-theme="dark"] .reset-filters:hover {
+            background-color: #FF3C57; /* Brighter red for hover in dark mode */
+            color: #ffffff;
         }
         
         /* Theme toggle styles */
@@ -413,22 +575,28 @@
             transition: all 0.3s ease;
         }
         
+        [data-theme="dark"] .theme-toggle {
+            background-color: #FFB800; /* Bright gold for better visibility in dark mode */
+            color: #121212; /* Dark text on bright background for better contrast */
+            box-shadow: 0 0 15px rgba(255, 184, 0, 0.4); /* Add glow effect */
+        }
+        
         .theme-toggle:hover {
             transform: translateY(-5px);
         }
         
-        .theme-toggle i {
-            font-size: 1.5rem;
+        [data-theme="dark"] .theme-toggle:hover {
+            background-color: #FFC933; /* Lighter gold on hover */
         }
     </style>
 </head>
 <body>
     <header>
         <div class="header-content">
-            <h1>Eng<span>Sci</span> Webring</h1>
+            <h1>UofT <span>Webring</span></h1>
             <div class="logos">
                 <img src="/images/uoft-logo.png" alt="UofT Logo" class="logo">
-                <img src="/images/engsci-logo.png" alt="EngSci Logo" class="logo">
+                <!-- <img src="/images/engsci-logo.png" alt="EngSci Logo" class="logo"> -->
             </div>
         </div>
     </header>
@@ -436,25 +604,45 @@
     <div class="container">
         <div class="search-container">
             <i class="fas fa-search search-icon"></i>
-            <input type="text" id="searchInput" class="search-input" placeholder="Search by name, website, or graduation year...">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search by name, website, program, or graduation year...">
         </div>
         
         <div class="main-content">
+            <div class="filters">
+                <h3>Filter Students</h3>
+                <div class="filter-group">
+                    <label for="programFilter">Program</label>
+                    <select id="programFilter" class="filter-select">
+                        <option value="">All Programs</option>
+                        <!-- Options will be added by JavaScript -->
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="yearFilter">Graduation Year</label>
+                    <select id="yearFilter" class="filter-select">
+                        <option value="">All Years</option>
+                        <!-- Options will be added by JavaScript -->
+                    </select>
+                </div>
+                <button id="resetFilters" class="reset-filters">Reset Filters</button>
+            </div>
+            
             <div>
                 <ul class="student-list" id="studentList">
                     <!-- Student list will be populated by JavaScript -->
                 </ul>
                 
                 <div class="how-to-join">
-                    <h2>Join the EngSci Webring</h2>
-                    <p>Are you a UofT Engineering Science student with a personal website? Join by following these steps:</p>
+                    <h2>Join the UofT Webring</h2>
+                    <p>Are you a UofT student with a personal website? Join by following these steps:</p>
                     <ol>
-                        <li>Fork the <a href="https://github.com/brayden-zhang/engsci-webring" class="github-link">GitHub repository</a></li>
+                        <li>Fork the <a href="https://github.com/brayden-zhang/uoft-webring" class="github-link">GitHub repository</a></li>
                         <li>Edit the <code>sites.js</code> file to add your information:</li>
                         <code>{
     name: "Your Name",
     url: "https://yourwebsite.com",
     year: "2X",
+    program: "Your Program",
     social: {
         linkedin: "https://linkedin.com/in/yourprofile",
         github: "https://github.com/yourusername",
@@ -470,7 +658,6 @@
             </div>
             
             <div id="featuredProfile">
-                <!-- Featured profile will be populated by JavaScript -->
             </div>
         </div>
     </div>
@@ -481,7 +668,7 @@
     </button>
     
     <footer>
-        <p>Made by the  UofT EngSci community.</p>
+        <p>Made by the UofT community.</p>
     </footer>
 
     <script>
@@ -490,6 +677,9 @@
             const featuredProfile = document.getElementById('featuredProfile');
             const searchInput = document.getElementById('searchInput');
             const themeToggle = document.getElementById('themeToggle');
+            const programFilter = document.getElementById('programFilter');
+            const yearFilter = document.getElementById('yearFilter');
+            const resetFilters = document.getElementById('resetFilters');
             
             // Theme toggle functionality
             themeToggle.addEventListener('click', function() {
@@ -517,6 +707,7 @@
             script.src = 'sites.js';
             script.onload = function() {
                 // Once sites.js is loaded, initialize the student list
+                populateFilters(sites);
                 displayStudents(sites);
                 
                 // Show first student as featured by default
@@ -525,6 +716,92 @@
                 }
             };
             document.head.appendChild(script);
+            
+            // Populate filter dropdowns
+            function populateFilters(students) {
+                const programs = new Set();
+                const years = new Set();
+                
+                students.forEach(student => {
+                    if (student.program) {
+                        programs.add(student.program);
+                    }
+                    if (student.year) {
+                        years.add(student.year);
+                    }
+                });
+                
+                // Sort programs and years alphabetically/numerically
+                [...programs].sort().forEach(program => {
+                    const option = document.createElement('option');
+                    option.value = program;
+                    option.textContent = program;
+                    programFilter.appendChild(option);
+                });
+                
+                [...years].sort().forEach(year => {
+                    const option = document.createElement('option');
+                    option.value = year;
+                    option.textContent = year;
+                    yearFilter.appendChild(option);
+                });
+            }
+            
+            // Filter students based on all criteria
+            function filterStudents() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const selectedProgram = programFilter.value;
+                const selectedYear = yearFilter.value;
+                
+                const filteredStudents = sites.filter(student => {
+                    // Check if student matches search term
+                    const matchesSearch = 
+                        student.name.toLowerCase().includes(searchTerm) ||
+                        student.url.toLowerCase().includes(searchTerm) ||
+                        (student.program && student.program.toLowerCase().includes(searchTerm)) ||
+                        (student.year && student.year.toLowerCase().includes(searchTerm));
+                    
+                    // Check if student matches program filter
+                    const matchesProgram = !selectedProgram || 
+                        (student.program && student.program === selectedProgram);
+                    
+                    // Check if student matches year filter
+                    const matchesYear = !selectedYear || student.year === selectedYear;
+                    
+                    return matchesSearch && matchesProgram && matchesYear;
+                });
+                
+                displayStudents(filteredStudents);
+                
+                // Update featured profile if there are results
+                if (filteredStudents.length > 0) {
+                    showFeaturedProfile(filteredStudents[0]);
+                } else {
+                    // Show "no results" message in featured profile
+                    featuredProfile.innerHTML = `
+                        <div class="profile-card">
+                            <div class="profile-content">
+                                <h3 class="profile-name">No Results</h3>
+                                <p>No students match your current filters.</p>
+                                <button class="reset-filters" onclick="document.getElementById('resetFilters').click()">Reset Filters</button>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+            
+            // Event listeners for filters
+            searchInput.addEventListener('input', filterStudents);
+            programFilter.addEventListener('change', filterStudents);
+            yearFilter.addEventListener('change', filterStudents);
+            
+            // Reset filters button
+            resetFilters.addEventListener('click', function() {
+                searchInput.value = '';
+                programFilter.value = '';
+                yearFilter.value = '';
+                filterStudents();
+            });
             
             // Display all students
             function displayStudents(students) {
@@ -540,13 +817,18 @@
                     // Ensure URL has proper format for external linking
                     const formattedUrl = ensureHttpPrefix(student.url);
                     
+                    // Display program if available
+                    const programDisplay = student.program 
+                        ? `<span class="program">${student.program}</span> • ` 
+                        : '';
+                    
                     li.innerHTML = `
                         <div class="student-content">
                             <div class="student-info">
                                 <div class="student-avatar">${initials}</div>
                                 <div class="student-details">
                                     <span class="name">${student.name}</span>
-                                    <span class="year">Class of ${student.year}</span>
+                                    <span class="year">${programDisplay}Class of ${student.year}</span>
                                 </div>
                             </div>
                             <a href="${formattedUrl}" class="visit-link" target="_blank" rel="noopener">Visit <i class="fas fa-external-link-alt link-icon"></i></a>
@@ -607,12 +889,18 @@
                 const formattedUrl = ensureHttpPrefix(student.url);
                 const displayUrl = formatUrl(formattedUrl);
                 
+                // Add program display if available
+                const programDisplay = student.program 
+                    ? `<p class="profile-program">${student.program}</p>` 
+                    : '';
+                
                 featuredProfile.innerHTML = `
                     <div class="profile-card">
                         <div class="profile-header"></div>
                         <div class="profile-content">
                             <h3 class="profile-name">${student.name}</h3>
-                            <p class="profile-year">Engineering Science ${student.year}</p>
+                            ${programDisplay}
+                            <p class="profile-year">Class of ${student.year}</p>
                             <a href="${formattedUrl}" class="profile-url" target="_blank" rel="noopener" title="Visit ${student.name}'s website">${displayUrl}</a>
                             ${socialLinksHTML}
                         </div>
@@ -624,20 +912,6 @@
             function formatUrl(url) {
                 return url.replace(/(^\w+:|^)\/\//, '');
             }
-            
-            // Filter students based on search input
-            searchInput.addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
-                const filteredStudents = sites.filter(student => {
-                    return (
-                        student.name.toLowerCase().includes(searchTerm) ||
-                        student.url.toLowerCase().includes(searchTerm) ||
-                        student.year.toLowerCase().includes(searchTerm)
-                    );
-                });
-                
-                displayStudents(filteredStudents);
-            });
         });
     </script>
 </body>
