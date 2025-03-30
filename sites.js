@@ -30,5 +30,16 @@ const sites = [
             linkedin: "https://www.linkedin.com/in/aditya-pisharoty/",
         }
     },
+    {
+        name: "Anupam Chettimada",
+        year: "2028",
+        program: "Industrial Engineering",
+        url: "https://www.linkedin.com/in/anupamchettimada/", 
+        social: {
+            linkedin: "https://www.linkedin.com/in/anupamchettimada/",
+            github: "https://github.com/Anupam-Anupam",
+            twitter: "https://x.com/achettimada"
+        } 
+    },
   
 ];
