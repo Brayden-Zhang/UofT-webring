@@ -41,5 +41,15 @@ const sites = [
             twitter: "https://x.com/achettimada"
         } 
     },
+    {
+        name: "Adam Omarali",
+        year: "2027",
+        program: "Engineering Science",
+        url: "https://www.adamomarali.com",
+        social: {
+            twitter: "https://x.com/adamomarali",
+            instagram: "https://www.instagram.com/adam.omarali/",
+        }
+    },
   
 ];
